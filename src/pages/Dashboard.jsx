@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { LogOut, Trash2, RefreshCcw, Search, Calendar, Clock, Phone, Mail, AlertCircle, CheckCircle } from 'lucide-react'
 import { API_URL, getToken, clearToken } from '../lib/auth'
+import AdminLayout from '../components/AdminLayout'
 
 const STATUS_OPTIONS = ["Pending", "Confirmed", "Cancelled", "Completed"]
 
