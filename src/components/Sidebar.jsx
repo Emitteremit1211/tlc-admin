@@ -7,27 +7,24 @@ import {
 
 export default function Sidebar() {
     const link =
-        "flex items-center gap-3 px-4 py-3 rounded-xl transition";
+        "flex items-center gap-3 px-4 py-3 rounded-2xl transition text-sm font-semibold";
 
     const active =
-        "bg-[#1B8C86] text-white";
+        "bg-[#1B8C86] text-white shadow-lg";
 
     const normal =
-        "text-slate-600 hover:bg-slate-100";
+        "text-white/60 hover:bg-white/10 hover:text-white";
 
     return (
-        <aside className="w-72 bg-white border-r border-slate-200 flex flex-col">
+        <aside className="tlca-glass fixed left-0 top-0 h-screen w-72 flex flex-col z-20 rounded-none">
 
-            <div className="p-8 border-b">
-
-                <h1 className="text-2xl font-bold text-[#0D2B3E]">
+            <div className="p-8 border-b border-white/10">
+                <h1 className="tlca-display text-xl font-semibold text-white">
                     TLC Admin
                 </h1>
-
-                <p className="text-sm text-slate-500">
+                <p className="text-xs text-[#7FDCD2] mt-1 uppercase tracking-widest font-semibold">
                     Management Portal
                 </p>
-
             </div>
 
             <nav className="flex-1 p-5 space-y-2">
@@ -35,35 +32,35 @@ export default function Sidebar() {
                 <NavLink
                     to="/"
                     end
-                    className={({ isActive }) =>
-                        `${link} ${isActive ? active : normal}`
-                    }
+                    className={({ isActive }) => `${link} ${isActive ? active : normal}`}
                 >
-                    <LayoutDashboard size={20} />
+                    <LayoutDashboard size={18} />
                     Dashboard
                 </NavLink>
 
                 <NavLink
                     to="/blogs"
-                    className={({ isActive }) =>
-                        `${link} ${isActive ? active : normal}`
-                    }
+                    className={({ isActive }) => `${link} ${isActive ? active : normal}`}
                 >
-                    <FileText size={20} />
+                    <FileText size={18} />
                     Blogs
                 </NavLink>
 
                 <NavLink
                     to="/blogs/create"
-                    className={({ isActive }) =>
-                        `${link} ${isActive ? active : normal}`
-                    }
+                    className={({ isActive }) => `${link} ${isActive ? active : normal}`}
                 >
-                    <PlusSquare size={20} />
+                    <PlusSquare size={18} />
                     Create Blog
                 </NavLink>
 
             </nav>
+
+            <div className="p-5 border-t border-white/10">
+                <p className="text-white/30 text-xs text-center">
+                    TLC Assist Living © {new Date().getFullYear()}
+                </p>
+            </div>
         </aside>
     );
 }

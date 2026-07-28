@@ -13,25 +13,22 @@ export default function Topbar() {
 
     return (
 
-        <header className="h-20 bg-[#0D2B3E] flex items-center justify-between px-8 text-white">
+        <header className="tlca-glass h-20 flex items-center justify-between px-8 rounded-none border-t-0 border-l-0 border-r-0 relative z-10">
 
             <div>
-
-                <h2 className="text-2xl font-bold">
+                <h2 className="tlca-display text-xl font-semibold text-white">
                     TLC Assist Living
                 </h2>
-
-                <p className="text-sm text-white/70">
+                <p className="text-xs text-white/50 mt-0.5">
                     Admin Dashboard
                 </p>
-
             </div>
 
             <button
                 onClick={logout}
-                className="flex items-center gap-2 bg-[#1B8C86] px-5 py-3 rounded-xl hover:bg-[#166d69]"
+                className="flex items-center gap-2 bg-[#1B8C86] hover:bg-[#166d69] text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition"
             >
-                <LogOut size={18} />
+                <LogOut size={16} />
                 Logout
             </button>
 
