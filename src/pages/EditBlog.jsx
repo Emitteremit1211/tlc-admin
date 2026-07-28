@@ -45,13 +45,11 @@ const EditBlog = () => {
           return
         }
 
-        // NOTE: This requires the admin-only route /api/admin/blogs/:id
-        // If your backend doesn't have this yet, it will 404
-        // Add this to your backend routes/blogs.js:
-        //   router.get("/admin/:id", requireAuth, getAdminBlogById);
-        const response = await fetch(`${API_URL}/admin/blogs/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
+        const response = await fetch(`${API_URL}/blogs/admin/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (!response.ok) throw new Error('Failed to fetch blog')
 
@@ -109,7 +107,7 @@ const EditBlog = () => {
       formData.append('title', form.title)
       formData.append('slug', form.slug || form.title.toLowerCase().replace(/\s+/g, '-'))
       formData.append('category', form.category)
-      formData.append('tags', form.tags.split(',').map(t => t.trim()).filter(Boolean))
+      formData.append('tags', form.tags)  // ✅ FIXED: Send tags as comma-separated string
       formData.append('featured', form.featured)
       formData.append('content', form.content)
       formData.append('status', form.status)
@@ -117,18 +115,20 @@ const EditBlog = () => {
         formData.append('coverImage', form.coverImage)
       }
 
-      const response = await fetch(`${API_URL}/blogs/${id}`, {
-        method: 'PUT',
-        headers: { Authorization: `Bearer ${token}` },
+      const response = await fetch(`${API_URL}/blogs/admin/${id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: formData,
-      })
+      });
 
       if (!response.ok) throw new Error('Failed to update blog')
 
       const updated = await response.json()
       setBlog(updated)
       setStatus('saved')
-      setTimeout(() => navigate('/admin/blogs'), 1500)
+      setTimeout(() => navigate('/blogs'), 1500)
     } catch (err) {
       console.error('Error updating blog:', err)
       setErrorMsg(err.message)
@@ -226,7 +226,7 @@ const EditBlog = () => {
           {/* Header */}
           <div className="mb-10">
             <button
-              onClick={() => navigate('/admin/blogs')}
+              onClick={() => navigate('/blogs')}
               className="inline-flex items-center gap-2 text-[#1B8C86] hover:text-[#0D2B3E] transition mb-6"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -433,7 +433,7 @@ const EditBlog = () => {
               </button>
               <button
                 type="button"
-                onClick={() => navigate('/admin/blogs')}
+                onClick={() => navigate('/blogs')}
                 className="tlc-glass text-[#0D2B3E] px-8 py-4 rounded-2xl font-semibold hover:bg-white/70 transition"
               >
                 Cancel

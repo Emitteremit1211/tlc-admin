@@ -50,7 +50,7 @@ export default function AdminLayout({ children }) {
             {/* SCROLLABLE CONTENT */}
             <div className="flex-1 ml-72 flex flex-col relative z-10 overflow-hidden">
                 <Topbar />
-                <main className="flex-1 overflow-y-auto p-8 bg-[#F3F6F7] rounded-tl-[32px]">
+                <main className="flex-1 overflow-y-auto p-8 bg-[#F3F6F7]">
                     {children}
                 </main>
             </div>
