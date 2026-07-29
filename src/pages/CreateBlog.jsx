@@ -42,7 +42,7 @@ export default function CreateBlog() {
             });
 
             if (image) {
-                formData.append("image", image);
+                formData.append("coverImage", image);
             }
 
             const res = await fetch(`${API_URL}/api/blogs`, {

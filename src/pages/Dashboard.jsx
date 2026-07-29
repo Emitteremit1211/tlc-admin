@@ -172,22 +172,6 @@ export default function Dashboard() {
                 <div className="tlc-blob w-[420px] h-[420px] bg-[#7FDCD2] -top-32 -left-24" />
                 <div className="tlc-blob w-[360px] h-[360px] bg-[#FFC9A3] -bottom-28 -right-16" />
 
-                {/* TOP BAR */}
-                <header className="tlc-glass-dark relative z-20 border-b">
-                    <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
-                        <div>
-                            <span className="text-[#7FDCD2] text-xs font-bold uppercase tracking-[0.2em]">TLC Assist Living</span>
-                            <h1 className="tlc-display text-2xl md:text-3xl font-bold text-white">Admin Dashboard</h1>
-                        </div>
-                        <button
-                            onClick={handleLogout}
-                            className="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-6 py-2.5 rounded-xl text-white text-sm font-semibold transition"
-                        >
-                            <LogOut className="w-5 h-5" /> Log Out
-                        </button>
-                    </div>
-                </header>
-
                 {/* MAIN CONTENT */}
                 <main className="tlc-root relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-12">
 

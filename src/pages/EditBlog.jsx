@@ -45,7 +45,7 @@ const EditBlog = () => {
           return
         }
 
-        const response = await fetch(`${API_URL}/blogs/admin/${id}`, {
+        const response = await fetch(`${API_URL}/api/blogs/admin/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -115,7 +115,7 @@ const EditBlog = () => {
         formData.append('coverImage', form.coverImage)
       }
 
-      const response = await fetch(`${API_URL}/blogs/admin/${id}`, {
+      const response = await fetch(`${API_URL}/api/blogs/admin/${id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,

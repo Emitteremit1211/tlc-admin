@@ -1,7 +1,10 @@
+import { useState } from "react";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 
 export default function AdminLayout({ children }) {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
     return (
         <div className="tlca-root flex h-screen overflow-hidden relative bg-gradient-to-br from-[#0D2B3E] via-[#0F3550] to-[#081C29]">
 
@@ -44,13 +47,13 @@ export default function AdminLayout({ children }) {
             <div className="tlca-blob w-[420px] h-[420px] bg-[#1B8C86] -top-32 -left-24" />
             <div className="tlca-blob w-[360px] h-[360px] bg-[#FFC9A3] bottom-0 right-0" />
 
-            {/* FIXED SIDEBAR */}
-            <Sidebar />
+            {/* SIDEBAR (off-canvas on mobile, fixed on desktop) */}
+            <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
             {/* SCROLLABLE CONTENT */}
-            <div className="flex-1 ml-72 flex flex-col relative z-10 overflow-hidden">
-                <Topbar />
-                <main className="flex-1 overflow-y-auto p-8 bg-[#F3F6F7]">
+            <div className="flex-1 md:ml-72 flex flex-col relative z-10 overflow-hidden">
+                <Topbar onMenuClick={() => setSidebarOpen(true)} />
+                <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-[#F3F6F7] ">
                     {children}
                 </main>
             </div>
