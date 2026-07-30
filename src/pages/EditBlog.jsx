@@ -127,6 +127,16 @@ const EditBlog = () => {
 
       const updated = await response.json()
       setBlog(updated)
+      setForm({
+        title: updated.title || '',
+        slug: updated.slug || '',
+        category: updated.category || '',
+        tags: updated.tags?.join(', ') || '',
+        featured: updated.featured || false,
+        content: updated.content || '',  // ← Add this line
+        coverImage: null,
+        status: updated.status || 'draft',
+      })
       setStatus('saved')
       setTimeout(() => navigate('/blogs'), 1500)
     } catch (err) {

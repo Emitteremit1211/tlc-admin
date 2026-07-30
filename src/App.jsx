@@ -8,6 +8,7 @@ import CreateBlog from './pages/CreateBlog'
 import EditBlog from './pages/EditBlog'
 
 import ProtectedRoute from './components/ProtectedRoute'
+import DeleteBlog from './pages/DeleteBlog'
 
 function App() {
   return (
@@ -47,6 +48,14 @@ function App() {
         element={
           <ProtectedRoute>
             <EditBlog />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/blogs/edit/:id"
+        element={
+          <ProtectedRoute>
+            <DeleteBlog />
           </ProtectedRoute>
         }
       />
