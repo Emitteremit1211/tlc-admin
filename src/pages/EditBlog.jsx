@@ -18,8 +18,10 @@ const EditBlog = () => {
   const [form, setForm] = useState({
     title: '',
     slug: '',
+    excerpt: '',
     category: '',
     tags: '',
+    readTime: '',
     featured: false,
     content: '',
     coverImage: null,
@@ -58,8 +60,10 @@ const EditBlog = () => {
         setForm({
           title: data.title || '',
           slug: data.slug || '',
+          excerpt: data.excerpt || '',
           category: data.category || '',
           tags: data.tags?.join(', ') || '',
+          readTime: data.readTime || '',
           featured: data.featured || false,
           content: data.content || '',
           coverImage: null,
@@ -106,8 +110,10 @@ const EditBlog = () => {
 
       formData.append('title', form.title)
       formData.append('slug', form.slug || form.title.toLowerCase().replace(/\s+/g, '-'))
+      formData.append('excerpt', form.excerpt)
       formData.append('category', form.category)
-      formData.append('tags', form.tags)  // ✅ FIXED: Send tags as comma-separated string
+      formData.append('tags', form.tags)
+      formData.append('readTime', form.readTime)
       formData.append('featured', form.featured)
       formData.append('content', form.content)
       formData.append('status', form.status)
@@ -130,10 +136,12 @@ const EditBlog = () => {
       setForm({
         title: updated.title || '',
         slug: updated.slug || '',
+        excerpt: updated.excerpt || '',
         category: updated.category || '',
         tags: updated.tags?.join(', ') || '',
+        readTime: updated.readTime || '',
         featured: updated.featured || false,
-        content: updated.content || '',  // ← Add this line
+        content: updated.content || '',
         coverImage: null,
         status: updated.status || 'draft',
       })
@@ -338,10 +346,25 @@ const EditBlog = () => {
                 />
                 <p className="text-xs text-[#4A5D6B] mt-2">Auto-generated from title if left blank</p>
               </div>
+
+              <div>
+                <label className="text-xs font-bold text-[#1B8C86] uppercase tracking-[0.2em] block mb-2">
+                  Short Description
+                </label>
+                <textarea
+                  name="excerpt"
+                  required
+                  rows={3}
+                  value={form.excerpt}
+                  onChange={handleChange}
+                  placeholder="A short summary shown on the blog list and previews..."
+                  className="tlc-input w-full rounded-xl px-4 py-3 text-sm text-[#0D2B3E] placeholder:text-[#4A5D6B]/50 resize-none"
+                />
+              </div>
             </div>
 
-            {/* Category & Tags */}
-            <div className="grid md:grid-cols-2 gap-6">
+            {/* Category, Tags & Read Time */}
+            <div className="grid md:grid-cols-3 gap-6">
               <div className="tlc-glass rounded-3xl p-8 tlc-sheen overflow-hidden">
                 <label className="text-xs font-bold text-[#1B8C86] uppercase tracking-[0.2em] block mb-2">
                   Category
@@ -373,6 +396,20 @@ const EditBlog = () => {
                   className="tlc-input w-full rounded-xl px-4 py-3 text-sm text-[#0D2B3E] placeholder:text-[#4A5D6B]/50"
                 />
                 <p className="text-xs text-[#4A5D6B] mt-2">Comma-separated</p>
+              </div>
+
+              <div className="tlc-glass rounded-3xl p-8 tlc-sheen overflow-hidden">
+                <label className="text-xs font-bold text-[#1B8C86] uppercase tracking-[0.2em] block mb-2">
+                  Read Time
+                </label>
+                <input
+                  type="text"
+                  name="readTime"
+                  value={form.readTime}
+                  onChange={handleChange}
+                  placeholder="5 min read"
+                  className="tlc-input w-full rounded-xl px-4 py-3 text-sm text-[#0D2B3E] placeholder:text-[#4A5D6B]/50"
+                />
               </div>
             </div>
 
