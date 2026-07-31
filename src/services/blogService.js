@@ -1,37 +1,36 @@
+import { getToken } from "../lib/auth";
+
 const API = import.meta.env.VITE_API_URL;
 
 export async function getBlogs() {
+    const token = getToken();
 
-    const token = localStorage.getItem("token");
-
-    const res = await fetch(`${API}/api/blogs`, {
-
+    const res = await fetch(`${API}/api/blogs/admin/all`, {
         headers: {
-
-            Authorization: `Bearer ${token}`
-
-        }
-
+            Authorization: `Bearer ${token}`,
+        },
     });
 
-    return await res.json();
+    if (!res.ok) {
+        throw new Error("Failed to fetch blogs");
+    }
 
+    return await res.json();
 }
 
 export async function deleteBlog(id) {
+    const token = getToken();
 
-    const token = localStorage.getItem("token");
-
-    await fetch(`${API}/api/blogs/${id}`, {
-
+    const res = await fetch(`${API}/api/blogs/admin/${id}`, {
         method: "DELETE",
-
         headers: {
-
-            Authorization: `Bearer ${token}`
-
-        }
-
+            Authorization: `Bearer ${token}`,
+        },
     });
 
+    if (!res.ok) {
+        throw new Error("Failed to delete blog");
+    }
+
+    return await res.json();
 }
